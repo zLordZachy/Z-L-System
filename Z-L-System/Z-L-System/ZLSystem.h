@@ -3,16 +3,32 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_ZLSystem.h"
 
+#include <QtGui>
+#include <QtCore>
+
+namespace Ui {
+	class ZLSystem;
+}
+
 class ZLSystem : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	ZLSystem(QWidget *parent = Q_NULLPTR);
+	explicit ZLSystem(QWidget *parent = 0);
 	~ZLSystem();
-private:
-	Ui::ZLSystemClass ui;
 
-	private slots:
-		void exit();
+private:
+	Ui::ZLSystemClass *ui;
+
+private slots:
+	void exit();
+
+protected:
+	void paintEvent(QPaintEvent *e);
+
+private:
+	void addText();
+private:
+	QString zapis();
 };

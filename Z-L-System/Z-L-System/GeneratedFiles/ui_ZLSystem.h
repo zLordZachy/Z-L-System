@@ -13,12 +13,11 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,9 +27,8 @@ class Ui_ZLSystemClass
 public:
     QWidget *centralWidget;
     QPushButton *pushButton;
-    QMenuBar *menuBar;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
+    QLabel *label;
+    QComboBox *comboBox;
 
     void setupUi(QMainWindow *ZLSystemClass)
     {
@@ -41,18 +39,14 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(390, 50, 131, 51));
+        pushButton->setGeometry(QRect(410, 570, 131, 51));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(200, 570, 81, 31));
+        comboBox = new QComboBox(centralWidget);
+        comboBox->setObjectName(QStringLiteral("comboBox"));
+        comboBox->setGeometry(QRect(540, 400, 69, 22));
         ZLSystemClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(ZLSystemClass);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1118, 21));
-        ZLSystemClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(ZLSystemClass);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        ZLSystemClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(ZLSystemClass);
-        statusBar->setObjectName(QStringLiteral("statusBar"));
-        ZLSystemClass->setStatusBar(statusBar);
 
         retranslateUi(ZLSystemClass);
 
@@ -63,6 +57,7 @@ public:
     {
         ZLSystemClass->setWindowTitle(QApplication::translate("ZLSystemClass", "ZLSystem", Q_NULLPTR));
         pushButton->setText(QApplication::translate("ZLSystemClass", "PushButton", Q_NULLPTR));
+        label->setText(QApplication::translate("ZLSystemClass", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };
