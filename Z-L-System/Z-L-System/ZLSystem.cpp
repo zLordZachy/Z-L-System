@@ -55,23 +55,25 @@ void ZLSystem::addVetev()
 {
 	for each (Vetev vetev in listVetvi)
 	{
-		char znak = vetev._znak;
+		int velikost = delkaUsecky(vetev) / 2;
+		Vetev *novaVetev;
+		Vetev *novaVetev2;
 		if (vetev._znak == 'A') {
-			int velikost = delkaUsecky(vetev)/2;
-			Vetev *novaVetev = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec + velikost, vetev._yKonec - velikost, 'A');
-			Vetev *novaVetev2 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec - velikost, vetev._yKonec - velikost, 'B');
-			listVetvi.push_front(*novaVetev);
-			listVetvi.push_front(*novaVetev2);
+			novaVetev = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec + velikost, vetev._yKonec - velikost, 'C');
+			novaVetev2 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec - velikost, vetev._yKonec - velikost, 'B');
 		}
 		if (vetev._znak == 'B') {
-			int velikost2 = delkaUsecky(vetev) / 2;;
-			Vetev *novaVetev3 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec + velikost2, vetev._yKonec - velikost2, 'A');
-			Vetev *novaVetev4 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec - velikost2, vetev._yKonec - velikost2, 'B');
-			Vetev *novaVetev5 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec + velikost2+50, vetev._yKonec - velikost2-8, 'A');
-			listVetvi.push_front(*novaVetev3);
-			listVetvi.push_front(*novaVetev4);
-			listVetvi.push_front(*novaVetev5);
+			novaVetev = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec + velikost, vetev._yKonec - velikost, 'A');
+			novaVetev2 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec + velikost, vetev._yKonec - velikost, 'C');
+			
 		}
+		if (vetev._znak == 'C') {
+			novaVetev = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec, vetev._yKonec - velikost, 'A');
+			novaVetev2 = new Vetev(vetev._xKonec, vetev._yKonec, vetev._xKonec - velikost, vetev._yKonec - velikost, 'B');
+		}
+
+		listVetvi.push_front(*novaVetev);
+		listVetvi.push_front(*novaVetev2);
 	
 	}
 	
