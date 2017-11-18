@@ -9,7 +9,10 @@ class ZLSystem : public QMainWindow
 
 public:
 	ZLSystem(QWidget *parent = Q_NULLPTR);
-
+	~ZLSystem();
 private:
 	Ui::ZLSystemClass ui;
+
+	private slots:
+		void exit();
 };
