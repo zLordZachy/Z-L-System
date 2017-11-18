@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -28,24 +27,20 @@ public:
     QWidget *centralWidget;
     QPushButton *pushButton;
     QLabel *label;
-    QComboBox *comboBox;
 
     void setupUi(QMainWindow *ZLSystemClass)
     {
         if (ZLSystemClass->objectName().isEmpty())
             ZLSystemClass->setObjectName(QStringLiteral("ZLSystemClass"));
-        ZLSystemClass->resize(1118, 663);
+        ZLSystemClass->resize(720, 720);
         centralWidget = new QWidget(ZLSystemClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(410, 570, 131, 51));
+        pushButton->setGeometry(QRect(580, 650, 131, 51));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(200, 570, 81, 31));
-        comboBox = new QComboBox(centralWidget);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
-        comboBox->setGeometry(QRect(540, 400, 69, 22));
+        label->setGeometry(QRect(10, 670, 81, 31));
         ZLSystemClass->setCentralWidget(centralWidget);
 
         retranslateUi(ZLSystemClass);

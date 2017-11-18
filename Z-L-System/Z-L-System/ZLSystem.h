@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_ZLSystem.h"
+#include "Vetev.h"
 
 #include <QtGui>
 #include <QtCore>
@@ -22,13 +23,15 @@ private:
 	Ui::ZLSystemClass *ui;
 
 private slots:
-	void exit();
+	void NextLevl();
 
 protected:
 	void paintEvent(QPaintEvent *e);
 
 private:
-	void addText();
+	void addVetev();
+
+	int delkaUsecky(Vetev vetev);
 private:
 	QString zapis();
 };
