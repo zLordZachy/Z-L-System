@@ -6,6 +6,7 @@
 
 #include <QtGui>
 #include <QtCore>
+#include <QTimer>
 
 namespace Ui {
 	class ZLSystem;
@@ -21,6 +22,11 @@ public:
 
 private:
 	Ui::ZLSystemClass *ui;
+	QTimer *timer;
+
+public slots:
+	void timerFunction();
+
 
 private slots:
 	void NextLevl();
@@ -34,4 +40,7 @@ private:
 	int delkaUsecky(Vetev vetev);
 private:
 	QString zapis();
+
+private: 
+	void vytvorNoveVetve(Vetev vetev, int posun, int velikost);
 };
