@@ -29,7 +29,7 @@ public slots:
 
 
 private slots:
-	void NextLevl();
+	void StartOnBt();
 
 protected:
 	void paintEvent(QPaintEvent *e);

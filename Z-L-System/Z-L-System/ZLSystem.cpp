@@ -19,7 +19,7 @@ ZLSystem::ZLSystem(QWidget *parent)
 	this->setFixedHeight(720);
 	this->setFixedWidth(720);
 	ui->setupUi(this);
-	connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(NextLevl()));
+	connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(StartOnBt()));
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(timerFunction()));
 	
@@ -32,31 +32,40 @@ ZLSystem::~ZLSystem()
 	delete ui;
 }
 
-void ZLSystem::NextLevl()
+void ZLSystem::StartOnBt()
 {
-	
-	/*	addVetev();
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
-		update();
-		cikulus++;*/
 	timer->start(2000);
 }
 
 QString ZLSystem::zapis() {
 	return ui->label->text();
-
 }
 
-void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun,int velikost)
+void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun, int velikost)
 {
-	Vetev *novaVetevB = new Vetev(vetev._xKonec, vetev._yKonec + posun, vetev._xKonec + velikost, vetev._yKonec - velikost + posun, 'B');;
+	/*Vetev *novaVetevB = new Vetev(vetev._xKonec - posun  , vetev._yKonec + posun , vetev._xKonec + velikost - posun, vetev._yKonec - velikost + posun, 'B');;
 	Vetev *novaVetevC = new Vetev(novaVetevB->_xKonec, novaVetevB->_yKonec, novaVetevB->_xKonec + velikost - (velikost / 2), novaVetevB->_yKonec - velikost, 'C');;
 	Vetev *novaVetevD = new Vetev(novaVetevC->_xKonec, novaVetevC->_yKonec, novaVetevC->_xKonec - velikost / 5, novaVetevC->_yKonec - velikost, 'D');
 
+	Vetev *novaVetevE = new Vetev(vetev._xKonec +posun , vetev._yKonec + posun , vetev._xKonec - velikost + posun, vetev._yKonec - velikost + posun, 'E');
+	Vetev *novaVetevF = new Vetev(novaVetevE->_xKonec, novaVetevE->_yKonec, novaVetevE->_xKonec - velikost / 2, novaVetevE->_yKonec - velikost, 'F');
+	Vetev *novaVetevG = new Vetev(novaVetevF->_xKonec, novaVetevF->_yKonec, novaVetevF->_xKonec + velikost / 5, novaVetevF->_yKonec - velikost, 'G');*/
+
+	/*Vetev *novaVetevB = new Vetev(vetev._xKonec + posun, vetev._yKonec - posun, vetev._xKonec + velikost - posun, vetev._yKonec - velikost - posun, 'B');;
+	Vetev *novaVetevC = new Vetev(novaVetevB->_xKonec, novaVetevB->_yKonec, novaVetevB->_xKonec + velikost - (velikost / 2), novaVetevB->_yKonec - velikost, 'C');;
+	Vetev *novaVetevD = new Vetev(novaVetevC->_xKonec, novaVetevC->_yKonec, novaVetevC->_xKonec - velikost / 5, novaVetevC->_yKonec - velikost, 'D');
+
+	Vetev *novaVetevE = new Vetev(vetev._xKonec + posun, vetev._yKonec + posun, vetev._xKonec - velikost + posun, vetev._yKonec - velikost + posun, 'E');
+	Vetev *novaVetevF = new Vetev(novaVetevE->_xKonec, novaVetevE->_yKonec, novaVetevE->_xKonec - velikost / 2, novaVetevE->_yKonec - velikost, 'F');
+	Vetev *novaVetevG = new Vetev(novaVetevF->_xKonec, novaVetevF->_yKonec, novaVetevF->_xKonec + velikost / 5, novaVetevF->_yKonec - velikost, 'G');*/
+
+	Vetev *novaVetevB = new Vetev(vetev._xKonec, vetev._yKonec + posun, vetev._xKonec + velikost, vetev._yKonec - velikost + posun, 'B');;
+	Vetev *novaVetevC = new Vetev(novaVetevB->_xKonec, novaVetevB->_yKonec, novaVetevB->_xKonec + velikost - (velikost / 2), novaVetevB->_yKonec - velikost, 'C');;
+	Vetev *novaVetevD = new Vetev(novaVetevC->_xKonec, novaVetevC->_yKonec, novaVetevC->_xKonec - velikost / 5, novaVetevC->_yKonec - velikost, 'D');
+	
 	Vetev *novaVetevE = new Vetev(vetev._xKonec, vetev._yKonec + posun, vetev._xKonec - velikost, vetev._yKonec - velikost + posun, 'E');
 	Vetev *novaVetevF = new Vetev(novaVetevE->_xKonec, novaVetevE->_yKonec, novaVetevE->_xKonec - velikost / 2, novaVetevE->_yKonec - velikost, 'F');
 	Vetev *novaVetevG = new Vetev(novaVetevF->_xKonec, novaVetevF->_yKonec, novaVetevF->_xKonec + velikost / 5, novaVetevF->_yKonec - velikost, 'G');
-
 
 	listVetvi.push_front(*novaVetevB);
 	listVetvi.push_front(*novaVetevC);
@@ -65,6 +74,7 @@ void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun,int velikost)
 	listVetvi.push_front(*novaVetevE);
 	listVetvi.push_front(*novaVetevF);
 	listVetvi.push_front(*novaVetevG);
+
 }
 
 void ZLSystem::paintEvent(QPaintEvent *e) {
@@ -74,40 +84,28 @@ void ZLSystem::paintEvent(QPaintEvent *e) {
 	{
 		painter.drawLine(var._xZacatek, var._yZacatek, var._xKonec, var._yKonec);
 	}
-	
-
 }
 
 void ZLSystem::addVetev()
 {
-	int a = cikulus;
-	int b = listVetvi.size();
-	char t = b;
- 	ui->label->setText( t + "%d");
+	int _ciklus = cikulus;
 	for each (Vetev vetev in listVetvi)
 	{
 		double velikost = delkaUsecky(vetev) /2;
-		int posun = a;
-		if (a != 0) {
-			posun = velikost / a;
-		}
-		Vetev *novaVetevA;
-		
-		Vetev *novaVetevB;
-		Vetev *novaVetevC;
-		Vetev *novaVetevD;
-
-		Vetev *novaVetevE;
-		Vetev *novaVetevF;
-		Vetev *novaVetevG;
-
+		int posun = _ciklus;
+		posun = 0;
 		if (vetev._znak == 'A') {
 			
+			if (_ciklus > 1) {
+				posun = velikost / _ciklus;
+			}
+
 			if (this->width() + posun < 700) {
-				novaVetevA = new Vetev(this->height() / 2, this->width() + posun, (this->height() / 2), this->width() - 150 + posun, 'A');
+				Vetev *novaVetevA = new Vetev(this->height() / 2, this->width() + posun, (this->height() / 2), this->width() - 150 + posun, 'A');
 				listVetvi.push_front(*novaVetevA);
 			}
 			vytvorNoveVetve(vetev, posun, velikost);
+			posun = 0;
 		}
 		else if (vetev._znak == 'B') {
 			vytvorNoveVetve(vetev, posun, velikost);
@@ -146,8 +144,7 @@ void ZLSystem::timerFunction() {
 
 int ZLSystem::delkaUsecky(Vetev vetev)
 {
-
-	return (int) sqrt(((pow((vetev._xKonec - vetev._xZacatek),2))+ pow((vetev._yKonec - vetev._yZacatek),2)));
+	return (int)sqrt(((pow((vetev._xKonec - vetev._xZacatek), 2)) + pow((vetev._yKonec - vetev._yZacatek), 2)));
 }
 
 
