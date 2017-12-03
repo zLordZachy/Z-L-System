@@ -17,6 +17,9 @@
     <ClCompile Include="Vetev.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TypVetve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -61,6 +64,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="Vetev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TypVetve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

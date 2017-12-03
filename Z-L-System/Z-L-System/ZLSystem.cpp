@@ -1,6 +1,7 @@
 #include "ZLSystem.h"
 #include "ui_ZLSystem.h"
 #include "Vetev.h"
+#include "TypVetve.h"
 #include <iostream>
 #include <string>
 #include <list>
@@ -10,10 +11,10 @@
 #include <vector>
 using namespace std;
 
-//static list<Vetev> listVetvi ;
 static vector<Vetev*> vektroVetvi(9999999);
 static int cikulus = 0;
 static int pocetVetvi = 1;
+
 ZLSystem::ZLSystem(QWidget *parent)
 	: QMainWindow(parent),
 	ui(new Ui::ZLSystemClass)
@@ -46,42 +47,22 @@ QString ZLSystem::zapis() {
 
 void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun, int velikost, int index)
 {
-	/*Vetev *novaVetevB = new Vetev(vetev._xKonec - posun  , vetev._yKonec + posun , vetev._xKonec + velikost - posun, vetev._yKonec - velikost + posun, 'B');;
-	Vetev *novaVetevC = new Vetev(novaVetevB->_xKonec, novaVetevB->_yKonec, novaVetevB->_xKonec + velikost - (velikost / 2), novaVetevB->_yKonec - velikost, 'C');;
-	Vetev *novaVetevD = new Vetev(novaVetevC->_xKonec, novaVetevC->_yKonec, novaVetevC->_xKonec - velikost / 5, novaVetevC->_yKonec - velikost, 'D');
-
-	Vetev *novaVetevE = new Vetev(vetev._xKonec +posun , vetev._yKonec + posun , vetev._xKonec - velikost + posun, vetev._yKonec - velikost + posun, 'E');
-	Vetev *novaVetevF = new Vetev(novaVetevE->_xKonec, novaVetevE->_yKonec, novaVetevE->_xKonec - velikost / 2, novaVetevE->_yKonec - velikost, 'F');
-	Vetev *novaVetevG = new Vetev(novaVetevF->_xKonec, novaVetevF->_yKonec, novaVetevF->_xKonec + velikost / 5, novaVetevF->_yKonec - velikost, 'G');*/
-
-	/*Vetev *novaVetevB = new Vetev(vetev._xKonec + posun, vetev._yKonec - posun, vetev._xKonec + velikost - posun, vetev._yKonec - velikost - posun, 'B');;
-	Vetev *novaVetevC = new Vetev(novaVetevB->_xKonec, novaVetevB->_yKonec, novaVetevB->_xKonec + velikost - (velikost / 2), novaVetevB->_yKonec - velikost, 'C');;
-	Vetev *novaVetevD = new Vetev(novaVetevC->_xKonec, novaVetevC->_yKonec, novaVetevC->_xKonec - velikost / 5, novaVetevC->_yKonec - velikost, 'D');
-
-	Vetev *novaVetevE = new Vetev(vetev._xKonec + posun, vetev._yKonec + posun, vetev._xKonec - velikost + posun, vetev._yKonec - velikost + posun, 'E');
-	Vetev *novaVetevF = new Vetev(novaVetevE->_xKonec, novaVetevE->_yKonec, novaVetevE->_xKonec - velikost / 2, novaVetevE->_yKonec - velikost, 'F');
-	Vetev *novaVetevG = new Vetev(novaVetevF->_xKonec, novaVetevF->_yKonec, novaVetevF->_xKonec + velikost / 5, novaVetevF->_yKonec - velikost, 'G');*/
-
 	if (vetev._vykreslena == true) {
 		return;
 	}
 
-	Vetev *novaVetevB = new Vetev(vetev._xKonec, vetev._yKonec + posun, vetev._xKonec + velikost, vetev._yKonec - velikost + posun, 'B');;
-	Vetev *novaVetevC = new Vetev(novaVetevB->_xKonec, novaVetevB->_yKonec, novaVetevB->_xKonec + velikost - (velikost / 2), novaVetevB->_yKonec - velikost, 'C');;
-	Vetev *novaVetevD = new Vetev(novaVetevC->_xKonec, novaVetevC->_yKonec, novaVetevC->_xKonec - velikost / 5, novaVetevC->_yKonec - velikost, 'D');
+	Vetev *novaVetev = &vetev;
+	int pocetNovychVetvi = (rand() % 6);
 	
-	Vetev *novaVetevE = new Vetev(vetev._xKonec, vetev._yKonec + posun, vetev._xKonec - velikost, vetev._yKonec - velikost + posun, 'E');
-	Vetev *novaVetevF = new Vetev(novaVetevE->_xKonec, novaVetevE->_yKonec, novaVetevE->_xKonec - velikost / 2, novaVetevE->_yKonec - velikost, 'F');
-	Vetev *novaVetevG = new Vetev(novaVetevF->_xKonec, novaVetevF->_yKonec, novaVetevF->_xKonec + velikost / 5, novaVetevF->_yKonec - velikost, 'G');
+	for (size_t i = 0; i < pocetNovychVetvi; i++)
+	{
+		int typVetve = (rand() % 6);
+		novaVetev = TypVetve::VytvorNovouVetevDleTypu(*novaVetev, typVetve, posun, velikost);
+		if (novaVetev->_xKonec > 0 && novaVetev->_yKonec > 0) {
+			vektroVetvi[pocetVetvi++] = novaVetev;
+		}
+	}
 
-	
-	vektroVetvi[pocetVetvi++] = novaVetevB;
-	vektroVetvi[pocetVetvi++] = novaVetevC;
-	vektroVetvi[pocetVetvi++] = novaVetevD;
-
-	vektroVetvi[pocetVetvi++] = novaVetevE;
-	vektroVetvi[pocetVetvi++] = novaVetevF;
-	vektroVetvi[pocetVetvi++] = novaVetevG;
 	vetev._vykreslena = true;
 }
 
