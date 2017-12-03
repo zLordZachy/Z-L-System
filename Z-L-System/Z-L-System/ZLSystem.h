@@ -42,5 +42,5 @@ private:
 	QString zapis();
 
 private: 
-	void vytvorNoveVetve(Vetev vetev, int posun, int velikost);
+	void vytvorNoveVetve(Vetev vetev, int posun, int velikost, int index);
 };
