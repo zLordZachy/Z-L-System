@@ -14,7 +14,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -26,7 +25,6 @@ class Ui_ZLSystemClass
 public:
     QWidget *centralWidget;
     QPushButton *pushButton;
-    QLabel *label;
 
     void setupUi(QMainWindow *ZLSystemClass)
     {
@@ -38,9 +36,6 @@ public:
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(580, 650, 131, 51));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 670, 81, 31));
         ZLSystemClass->setCentralWidget(centralWidget);
 
         retranslateUi(ZLSystemClass);
@@ -52,7 +47,6 @@ public:
     {
         ZLSystemClass->setWindowTitle(QApplication::translate("ZLSystemClass", "ZLSystem", Q_NULLPTR));
         pushButton->setText(QApplication::translate("ZLSystemClass", "PushButton", Q_NULLPTR));
-        label->setText(QApplication::translate("ZLSystemClass", "TextLabel", Q_NULLPTR));
     } // retranslateUi
 
 };

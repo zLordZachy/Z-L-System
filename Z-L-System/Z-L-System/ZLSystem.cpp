@@ -9,9 +9,10 @@
 #include <thread>
 #include <QDebug>
 #include <vector>
+#include <omp.h>
 using namespace std;
-
-static vector<Vetev*> vektroVetvi(9999999);
+static long maxVetvi = 99999999999999;
+static vector<Vetev*> vektroVetvi(maxVetvi);
 static int cikulus = 0;
 static int pocetVetvi = 1;
 
@@ -42,7 +43,7 @@ void ZLSystem::StartOnBt()
 }
 
 QString ZLSystem::zapis() {
-	return ui->label->text();
+	return "";
 }
 
 void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun, int velikost, int index)
@@ -52,11 +53,13 @@ void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun, int velikost, int index)
 	}
 
 	Vetev *novaVetev = &vetev;
-	int pocetNovychVetvi = (rand() % 6);
+	int pocetNovychVetvi = (rand() % 6+1);
 	
+#pragma omp parallel
+#pragma omp for
 	for (size_t i = 0; i < pocetNovychVetvi; i++)
 	{
-		int typVetve = (rand() % 6);
+		int typVetve = (rand() % 6+1);
 		novaVetev = TypVetve::VytvorNovouVetevDleTypu(*novaVetev, typVetve, posun, velikost);
 		if (novaVetev->_xKonec > 0 && novaVetev->_yKonec > 0) {
 			vektroVetvi[pocetVetvi++] = novaVetev;
@@ -68,7 +71,17 @@ void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun, int velikost, int index)
 
 void ZLSystem::paintEvent(QPaintEvent *e) {
 	QPainter painter(this);
+	
 
+	if (cikulus > 8) {
+		painter.setBrush(Qt::green);
+	}
+	else {
+		painter.setBrush(Qt::black);
+	}
+
+#pragma omp parallel
+#pragma omp for
 	for (int i = 0; i < pocetVetvi; i++)
 	{
 		painter.drawLine(vektroVetvi[i]->_xZacatek, vektroVetvi[i]->_yZacatek, vektroVetvi[i]->_xKonec, vektroVetvi[i]->_yKonec);
@@ -80,6 +93,9 @@ void ZLSystem::addVetev()
 	int _ciklus = cikulus;
 
 	int opakovani = pocetVetvi;
+
+#pragma omp parallel
+#pragma omp for
 	for (int i = 0; i < opakovani; i++)
 	{
 		double velikost = delkaUsecky(*vektroVetvi[i]) /2;
@@ -128,8 +144,10 @@ void ZLSystem::timerFunction() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	update();
 	cikulus++;
-	if (cikulus > 6) {
-		timer->stop();
+	if (cikulus > 10) {
+		//timer->stop();
+		pocetVetvi = 1;
+		cikulus = 0;
 	}
 	qDebug() << "update..";
 }
