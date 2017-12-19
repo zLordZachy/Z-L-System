@@ -10,6 +10,8 @@
 #include <QDebug>
 #include <vector>
 #include <omp.h>
+
+
 using namespace std;
 static long maxVetvi = 99999999999999;
 static vector<Vetev*> vektroVetvi(maxVetvi);
@@ -53,7 +55,7 @@ void ZLSystem::vytvorNoveVetve(Vetev vetev, int posun, int velikost, int index)
 	}
 
 	Vetev *novaVetev = &vetev;
-	int pocetNovychVetvi = (rand() % 6+1);
+	int pocetNovychVetvi = (rand() % 5+1);
 	
 #pragma omp parallel
 #pragma omp for
@@ -73,17 +75,20 @@ void ZLSystem::paintEvent(QPaintEvent *e) {
 	QPainter painter(this);
 	
 
-	if (cikulus > 8) {
-		painter.setBrush(Qt::green);
-	}
-	else {
-		painter.setBrush(Qt::black);
-	}
+
+		painter.setBrush(Qt::NoBrush);
+		painter.setPen(Qt::black);
+	
 
 #pragma omp parallel
 #pragma omp for
 	for (int i = 0; i < pocetVetvi; i++)
 	{
+		if (i > 350000) {
+			painter.setBrush(Qt::NoBrush);
+			painter.setPen(Qt::darkGreen);
+		}
+
 		painter.drawLine(vektroVetvi[i]->_xZacatek, vektroVetvi[i]->_yZacatek, vektroVetvi[i]->_xKonec, vektroVetvi[i]->_yKonec);
 	}
 }
@@ -102,6 +107,7 @@ void ZLSystem::addVetev()
 		int posun = _ciklus;
 		posun = 0;
 		if (vektroVetvi[i]->_znak == 'A') {
+
 			
 			if (_ciklus > 1) {
 				posun = velikost / _ciklus;
@@ -115,26 +121,8 @@ void ZLSystem::addVetev()
 			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
 			posun = 0;
 		}
-		else if (vektroVetvi[i]->_znak == 'B') {
-			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
-		}
-		else if (vektroVetvi[i]->_znak == 'C') {
-			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
-		}
-		else if (vektroVetvi[i]->_znak == 'D') {
-			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);;
-		}
-		else if (vektroVetvi[i]->_znak == 'E') {
-			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
-		}
-		else if (vektroVetvi[i]->_znak == 'F') {
-			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
-		}
-		else if (vektroVetvi[i]->_znak == 'G') {
-			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
-		}
 		else {
-			continue;
+			vytvorNoveVetve(*vektroVetvi[i], posun, velikost, i);
 		}
 	}
 }
@@ -144,7 +132,7 @@ void ZLSystem::timerFunction() {
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	update();
 	cikulus++;
-	if (cikulus > 10) {
+	if (cikulus > 9) {
 		//timer->stop();
 		pocetVetvi = 1;
 		cikulus = 0;

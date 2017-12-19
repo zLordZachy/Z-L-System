@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Generuj strom</string>
     </property>
    </widget>
   </widget>

@@ -46,7 +46,7 @@ public:
     void retranslateUi(QMainWindow *ZLSystemClass)
     {
         ZLSystemClass->setWindowTitle(QApplication::translate("ZLSystemClass", "ZLSystem", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("ZLSystemClass", "PushButton", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("ZLSystemClass", "Generuj strom", Q_NULLPTR));
     } // retranslateUi
 
 };
